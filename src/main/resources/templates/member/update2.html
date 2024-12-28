@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원 정보 수정</title>
+    <link rel="stylesheet" href="/css/create2.css">
+</head>
+<body>
+<div class="container">
+    <h2>회원 정보 수정</h2>
+    <table>
+        <tr>
+            <td>수정된 아이디:</td>
+            <td><span th:text="${memberVO.id}"></span></td>
+        <tr>
+            <td>수정된 전화번호:</td>
+            <td><span th:text="${memberVO.tel}"></span></td>
+        </tr>
+    </table>
+    <div class="button">
+        <a href="/member">회원 전체 메뉴로 가기</a>
+    </div>
+</div>
+</body>
+</html>

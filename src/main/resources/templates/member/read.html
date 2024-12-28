@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body style="background-color: lime">
+<h1>회원정보 신청 완료</h1>
+<hr>
+<!--태그내에 사용될 때 -->
+<h1 th:text="${id}"></h1>
+<!--다른 텍스값을 붙여 출력할 때 ''필요!-->
+<h1 th:text="'이름은 ' + ${name}"></h1>
+
+<!--태그밖에서 사용될 때 span태그 이용-->
+<b> 아이디는 <span th:text="${id}"></span> </b> <br>
+<b> 이름은 <span th:text="${name}"></span> </b> <br>
+
+<hr style="background-color: red">
+<!-- id2가 없으므로 null이면 기본값 출력-->
+<h1 th:if="${id2 != null}" th:text="'아이디는 ' + ${id2}"></h1>
+<h1 th:if="${id2 == null}">Welcome!</h1>
+
+</body>
+</html>
+
+
+
+
+
+
+
+

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원 정보</title>
+    <link rel="stylesheet" href="/css/create2.css">
+</head>
+<body>
+<div class="container">
+    <h2>회원 정보</h2>
+    <table>
+        <tr>
+            <td>아이디:</td>
+            <td><span th:text="${memberVO.id}"></span></td>
+        </tr>
+        <tr>
+            <td>비밀번호:</td>
+            <td><span th:text="${memberVO.pw}"></span></td>
+        </tr>
+        <tr>
+            <td>이름:</td>
+            <td><span th:text="${memberVO.name}"></span></td>
+        </tr>
+        <tr>
+            <td>전화번호:</td>
+            <td><span th:text="${memberVO.tel}"></span></td>
+        </tr>
+    </table>
+    <div class="button">
+        <a href="/create">회원 가입으로 돌아가기</a>
+    </div>
+</div>
+</body>
+</html>

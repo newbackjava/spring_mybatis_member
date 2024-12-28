@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Board Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f6f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 700px;
+            text-align: center;
+        }
+        .header {
+            font-size: 26px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        td button {
+            padding: 10px 15px;
+            font-size: 14px;
+            border: none;
+            border-radius: 4px;
+            background-color: #e74c3c;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        td button:hover {
+            background-color: #c0392b;
+        }
+        td input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 80%;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">Board Management</div>
+    <table>
+        <tr>
+            <th>Create Post</th>
+            <th>Delete Post</th>
+            <th>Edit Post</th>
+            <th>View Post</th>
+        </tr>
+        <tr>
+            <td>
+                <a href="createPost">
+                    <button>게시판 글쓰기</button>
+                </a>
+            </td>
+            <td>
+                <a href="deletePost">
+                    <button>게시판 글삭제</button>
+                </a>
+            </td>
+            <td>
+                <a href="editPost">
+                    <button>게시판 글수정</button>
+                </a>
+            </td>
+            <td>
+                <form action="viewPost" method="post">
+                    <label for="no">no:</label>
+                    <input type="number" id="no" name="no" value="1">
+                    <br><br>
+                    <button type="submit">게시판 글보기</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
