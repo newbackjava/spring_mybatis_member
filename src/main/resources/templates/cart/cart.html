@@ -4,47 +4,14 @@
 
 <div layout:fragment="content">
 
-    <!-- 게시판 글쓰기 폼 -->
-    <div  th:if="${id != null}"  class="container">
-        <div class="header">Board Management</div>
+    <div class="container">
+        <div class="header">장바구니</div>
         <table>
             <tr>
-                <th>Create Post</th>
-                <th>Delete Post</th>
-                <th>Edit Post</th>
-                <th>View Post</th>
-            </tr>
-            <tr>
-                <td>
-                    <a href="/board/createPost">
-                        <button>게시판 글쓰기</button>
-                    </a>
-                </td>
-                <td>
-                    <a href="/board/deletePost">
-                        <button>게시판 글삭제</button>
-                    </a>
-                </td>
-                <td>
-                    <a href="/board/editPost">
-                        <button>게시판 글수정</button>
-                    </a>
-                </td>
-                <td>
-                    <form action="/board/viewPost" method="post">
-                        <label for="no">no:</label>
-                        <input type="number" id="no" name="no" value="1">
-                        <br><br>
-                        <button type="submit">게시판 글보기</button>
-                    </form>
-                </td>
+                <td>장바구니 내용</td>
             </tr>
         </table>
     </div>
-    <div th:if="${id == null}" class="container">
-        로그인이 필요합니다. <a href="/member/member">회원정보 페이지로</a>
-    </div>
-
     <hr>
 </div>
 

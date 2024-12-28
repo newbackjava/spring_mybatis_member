@@ -1,7 +1,9 @@
-package com.example.demo.controller;
+package com.example.demo.member.controller;
 
-import com.example.demo.vo.MemberVO;
+import com.example.demo.member.service.MemberService;
+import com.example.demo.member.vo.MemberVO;
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,16 +15,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Slf4j
 @Controller
 @RequestMapping("member")
+@RequiredArgsConstructor
 public class MemberController {
+
+    private final MemberService memberService;
+
+    @GetMapping("member")
+    public String member(){
+        return "member/member";
+        //return하는 String인 member에 index.html을 만들어 호출하여 http응답함.
+        //templates아래 member.html을 호출
+    }
+
 
     @GetMapping("create")
     public String create(){
+        log.info("create 요청됨.");
         //return "create2";
         return "member/create";
     }
 
     @PostMapping("create2")
     public String create2(MemberVO memberVO, Model model){
+        log.info("create2 요청됨.");
+        MemberVO memberVO2 = memberService.createMember(memberVO);
+        System.out.println("insert 결과 ====> " + memberVO2);
         model.addAttribute("memberVO", memberVO);
         return "member/create2";
     }
@@ -33,21 +50,13 @@ public class MemberController {
     }
 
     @PostMapping("read")
-    public String create(int id, Model model){
+    public String create(String id, Model model){
         //String id = request.getParameter("id");
         //@RequestParam("id") int id
         //==> 전달받은 파라메터이름과 저장할 변수이름이 다른 경우 사용
         model.addAttribute("id", id);
         model.addAttribute("name", "hong");
         return "member/read";
-    }
-
-    @PostMapping("login")
-    public String login(int id, String pw, HttpSession session, Model model){
-        if(id == 100 & pw.equals("1234")){
-            session.setAttribute("id", id);
-        }
-        return "member/member";
     }
 
     /*
@@ -62,6 +71,21 @@ public class MemberController {
     */
 
 
+    @PostMapping("login")
+    public String login(String id, String pw, HttpSession session){
+        if(id.equals("apple") && pw.equals("1234")){
+            session.setAttribute("id", id);
+        }
+        System.out.println("세션값 설정 완료>> " + session.getAttribute("id") );
+        return "redirect:/";
+    }
+
+    @GetMapping("logout")
+    public String logout(HttpSession session){
+        session.removeAttribute("id");
+        System.out.println("삭제된 세션값 설정 완료>> " + session.getAttribute("id") );
+        return "redirect:/";
+    }
 
     @GetMapping("update")
     public String update(){

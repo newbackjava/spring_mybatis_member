@@ -26,11 +26,13 @@ public class DispatcherServletErrorLogger {
             String line;
             while ((line = reader.readLine()) != null) {
                 if (line.contains("DispatcherServlet") && line.contains("ERROR")) {
-                    // 날짜/시간과 에러 메시지를 추출
+                    // 날짜/시간, 요청 방식(HTTP 메서드), 에러 메시지 추출
                     String dateTime = extractDateTime(line);
+                    String httpMethod = extractHttpMethod(line);
                     String errorMessage = extractErrorMessage(line);
-                    // 추출한 정보를 리스트에 저장
-                    errorSummary.add(new String[]{dateTime, errorMessage});
+
+                    // 요약 정보 추가
+                    errorSummary.add(new String[]{dateTime, httpMethod, errorMessage});
                 }
             }
         } catch (IOException e) {
@@ -55,34 +57,48 @@ public class DispatcherServletErrorLogger {
         }
     }
 
+    private static String extractHttpMethod(String logLine) {
+        try {
+            // 요청 방식 추출: "GET" 또는 "POST" 등의 HTTP 메서드 탐색
+            if (logLine.contains("GET")) return "GET";
+            if (logLine.contains("POST")) return "POST";
+            if (logLine.contains("PUT")) return "PUT";
+            if (logLine.contains("DELETE")) return "DELETE";
+            return "Unknown Method";
+        } catch (Exception e) {
+            return "Unknown Method";
+        }
+    }
+
     private static String extractErrorMessage(String logLine) {
         int errorIndex = logLine.indexOf("ERROR");
-        return errorIndex != -1 ? logLine.substring(errorIndex) : "Unknown Error";
+        return errorIndex != -1 ? logLine.substring(errorIndex + 6).trim() : "Unknown Error";
     }
 
     private static void printErrorLogTable(List<String[]> errorLogSummary) {
         // 표 헤더 출력
-        System.out.println("+----------------------+----------------------------------------------------------+");
-        System.out.println("|       요일/시간       |                         에러 메시지                       |");
-        System.out.println("+----------------------+----------------------------------------------------------+");
+        System.out.println("+----------------------+-------------+-----------------------------------+");
+        System.out.println("|       요일/시간       | 요청 방식   |              에러 메시지           |");
+        System.out.println("+----------------------+-------------+-----------------------------------+");
 
         // 에러 로그 출력
         for (String[] error : errorLogSummary) {
             String dateTime = String.format("%-20s", error[0]); // 요일/시간
-            String errorMessage = String.format("%-56s", error[1]); // 에러 메시지
-            System.out.println("| " + dateTime + " | " + errorMessage + " |");
+            String httpMethod = String.format("%-11s", error[1]); // HTTP 요청 방식
+            String errorMessage = String.format("%-33s", error[2]); // 에러 메시지
+            System.out.println("| " + dateTime + " | " + httpMethod + " | " + errorMessage + " |");
         }
 
         // 표 하단 출력
-        System.out.println("+----------------------+----------------------------------------------------------+");
+        System.out.println("+----------------------+-------------+-----------------------------------+");
     }
 }
 
-//+----------------------+----------------------------------------------------------+
-//        |       요일/시간       |                         에러 메시지                       |
-//        +----------------------+----------------------------------------------------------+
-//        | 일 00:38:08           | ERROR" dispatch for GET "/error", parameters={}          |
-//        | 일 00:38:08           | ERROR" dispatch, status 404                              |
-//        | 일 09:34:02           | ERROR" dispatch for GET "/error", parameters={}          |
-//        | 일 09:34:02           | ERROR" dispatch, status 404                              |
-//        +----------------------+----------------------------------------------------------+
+//+----------------------+-------------+-----------------------------------+
+//        |       요일/시간       | 요청 방식   |              에러 메시지           |
+//        +----------------------+-------------+-----------------------------------+
+//        | 일 00:38:08           | GET         | dispatch for GET "/error", parameters={} |
+//        | 일 00:38:08           | Unknown Method | dispatch, status 404              |
+//        | 일 09:34:02           | GET         | dispatch for GET "/error", parameters={} |
+//        | 일 09:34:02           | Unknown Method | dispatch, status 404              |
+//        +----------------------+-------------+-----------------------------------+

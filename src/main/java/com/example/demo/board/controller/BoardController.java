@@ -1,7 +1,6 @@
-package com.example.demo.controller;
+package com.example.demo.board.controller;
 
-import com.example.demo.vo.BoardVO;
-import jakarta.servlet.http.HttpServletRequest;
+import com.example.demo.board.vo.BoardVO;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -15,6 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("board")
 public class BoardController {
+
+    @GetMapping("board")
+    public String board(HttpSession session){
+        session.setAttribute("userId", "apple");
+        return "board/board";
+    }
 
     @GetMapping("createPost")
     public String create() {

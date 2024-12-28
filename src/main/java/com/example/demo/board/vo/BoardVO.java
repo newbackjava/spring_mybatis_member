@@ -1,4 +1,4 @@
-package com.example.demo.vo;
+package com.example.demo.board.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

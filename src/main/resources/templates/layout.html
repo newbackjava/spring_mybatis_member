@@ -1,133 +1,111 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spring Example</title>
-    <!-- Bootstrap CSS 먼저 참조 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MQC9o3SkhFY3FtFJUEjZVpEbtYz1e8cNbsrGLhxT2yyYgGs++iPHGk6lQR3/ye/e" crossorigin="anonymous">
-
-    <!-- 사용자 정의 CSS -->
-    <link rel="stylesheet" href="/css/project.css">
-
-    <!-- Bootstrap JavaScript 참조 -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-PNKjE9QcJXQCG2iIc5C4wEcV1mZcmfQJy8f3kHkPbMsyxYRM6HW3m4iJ7hkG7fxn" crossorigin="anonymous"></script>
-
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Simple Sidebar - Start Bootstrap Template</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="/css/style.css" rel="stylesheet" />
 </head>
 <body>
-<!-- Navigation Bar -->
-
-<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm" layout:fragment="header">
-    <div class="container-fluid">
-
-        <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-                <a class="nav-link d-flex align-items-center" href="/">
-                    <img src="/img/bye.png" alt="회원정보" width="24" height="24" class="me-2">
-                    홈으로
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link d-flex align-items-center" href="/member/member">
-                    <img src="/img/member.png" alt="회원정보" width="24" height="24" class="me-2">
-                    회원정보
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link d-flex align-items-center" href="/board/board">
-                    <img src="/img/board.png" alt="게시판" width="24" height="24" class="me-2">
-                    게시판
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link d-flex align-items-center" href="/product/product">
-                    <img src="/img/product.png" alt="상품정보" width="24" height="24" class="me-2">
-                    상품정보
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link d-flex align-items-center" href="/cart/cart">
-                    <img src="/img/cart.png" alt="장바구니" width="24" height="24" class="me-2">
-                    장바구니
-                </a>
-            </li>
-        </ul>
+<div class="d-flex" id="wrapper">
+    <!-- Sidebar-->
+    <div class="border-end bg-white" id="sidebar-wrapper">
+        <div class="sidebar-heading border-bottom bg-light">
+            <img th:src="@{/img/coffee.png}" alt="logo" width="150" height="100" class="me-2 menu-img"/>
+        </div>
+        <div class="list-group list-group-flush">
+            <a class="list-group-item list-group-item-action list-group-item-light p-3 menu" href="/">
+                <img src="/img/bye.png" alt="메인이미지" width="70" height="70" class="me-2 menu-img">
+                <span class="menu-text">홈으로</span>
+            </a>
+            <a class="list-group-item list-group-item-action list-group-item-light p-3 menu" href="/member/member">
+                <img src="/img/member.png" alt="회원정보" width="70" height="70" class="me-2 menu-img">
+                <span class="menu-text">회원정보</span>
+            </a>
+            <a class="list-group-item list-group-item-action list-group-item-light p-3 menu" href="/board/board">
+                <img src="/img/board.png" alt="게시판" width="70" height="70" class="me-2 menu-img">
+                <span class="menu-text">게시판</span>
+            </a>
+            <a class="list-group-item list-group-item-action list-group-item-light p-3 menu" href="/product/product">
+                <img src="/img/product.png" alt="상품정보" width="70" height="70" class="me-2 menu-img">
+                <span class="menu-text">상품정보</span>
+            </a>
+            <a class="list-group-item list-group-item-action list-group-item-light p-3 menu" href="/cart/cart">
+                <img src="/img/cart.png" alt="장바구니" width="70" height="70" class="me-2 menu-img">
+                <span class="menu">장바구니</span>
+            </a>
+        </div>
     </div>
-</nav>
+    <!-- Page content wrapper-->
+    <div id="page-content-wrapper">
+        <!-- Top navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+            <div class="container-fluid">
+                <button class="btn btn-primary" id="sidebarToggle">Toggle Menu</button>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+                        <li class="nav-item active"><a class="nav-link" href="#!">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#!">Link</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#!">Action</a>
+                                <a class="dropdown-item" href="#!">Another action</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#!">Something else here</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
 
-<div class="content" layout:fragment="content">
-<!-- 게시판 글쓰기 폼 -->
-<div  th:if="${id != null}"  class="container">
-    <div class="header">Board Management</div>
-    <table>
-        <tr>
-            <th>Create Post</th>
-            <th>Delete Post</th>
-            <th>Edit Post</th>
-            <th>View Post</th>
-        </tr>
-        <tr>
-            <td>
-                <a href="/board/createPost">
-                    <button>게시판 글쓰기</button>
-                </a>
-            </td>
-            <td>
-                <a href="/board/deletePost">
-                    <button>게시판 글삭제</button>
-                </a>
-            </td>
-            <td>
-                <a href="/board/editPost">
-                    <button>게시판 글수정</button>
-                </a>
-            </td>
-            <td>
-                <form action="/board/viewPost" method="post">
-                    <label for="no">no:</label>
-                    <input type="number" id="no" name="no" value="1">
-                    <br><br>
-                    <button type="submit">게시판 글보기</button>
-                </form>
-            </td>
-        </tr>
-    </table>
-</div>
-<div th:if="${id == null}" class="container">
-    로그인이 필요합니다. <a href="/member/member">회원정보 페이지로</a>
-</div>
-<hr>
-</div>
+        <!--        가운데 내용 들어갈 부분           -->
+        <div class="container-fluid" layout:fragment="content">
+        </div>
 
-<!-- Footer -->
-<div class="container  mt-5"  layout:fragment="footer">
-    <footer>
-        <table>
-            <tr>
-                <th>회사 정보</th>
-                <th>고객 센터</th>
-                <th>기타 안내</th>
-            </tr>
-            <tr>
-                <td>
-                    <p>상호명: 신세계I&C</p>
-                    <p>주소: 서울특별시 강남구 테헤란로 123</p>
-                    <p>사업자 등록번호: 123-45-67890</p>
-                </td>
-                <td>
-                    <p>365 고객센터</p>
-                    <p>1234-5678 (유료)</p>
-                </td>
-                <td>
-                    <p>환불 및 교환 정책에 따라 처리됩니다.</p>
-                    <p>문의사항은 고객센터로 연락주세요.</p>
-                </td>
-            </tr>
-        </table>
-    </footer>
+        <!-- Footer -->
+        <div class="container-fluid"  layout:fragment="footer">
+            <div class="container  mt-5" >
+                <div class="container-fluid bg-light border-top mt-5">
+                    <div class="container py-4">
+                        <div class="row text-center text-md-start">
+                            <div class="col-md-4 mb-3">
+                                <h5 class="text-uppercase fw-bold">회사 정보</h5>
+                                <p class="mb-1">상호명: 신세계I&C</p>
+                                <p class="mb-1">주소: 서울특별시 강남구 테헤란로 123</p>
+                                <p class="mb-0">사업자 등록번호: 123-45-67890</p>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <h5 class="text-uppercase fw-bold">고객 센터</h5>
+                                <p class="mb-1">365 고객센터</p>
+                                <p class="mb-0">1234-5678 (유료)</p>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <h5 class="text-uppercase fw-bold">기타 안내</h5>
+                                <p class="mb-1">환불 및 교환 정책에 따라 처리됩니다.</p>
+                                <p class="mb-0">문의사항은 고객센터로 연락주세요.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
 </div>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
+<!-- Core theme JS-->
+    <script th:src="@{/js/scripts.js}"></script>
+    <th:block layout:fragment="script">
+<!--        자바 스크립트 들어갈 부분~-->
+    </th:block>
 </body>
 </html>
-
-
