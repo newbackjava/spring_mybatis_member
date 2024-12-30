@@ -7,6 +7,7 @@
 <div layout:fragment="content">
     <!-- 로그인 폼 -->
     <div th:if="${session.id == null}" class="container mt-5">
+        <h4  class="row justify-content-center" style="color: red;">[[${result}]]</h4>
         <div class="container mt-5">
             <div class="row justify-content-center">
                 <div class="col-lg-4 col-md-6 col-sm-8">
@@ -41,9 +42,31 @@
             <strong th:text="'ID: ' + ${session.id}"></strong>님 환영합니다!
             <br><br><br>
 
-            <a href="/member/logout">
-                <button type="button" class="btn btn-secondary btn-lg">회원 로그아웃</button>
-            </a>
+            <table class="table mx-auto text-center">
+                <tr>
+                    <td>
+                        <form action="/member/read" method="post">
+                            <input type="hidden" name="id" th:value="${session.id}">
+                            <button type="submit" class="btn btn-primary btn-lg" style="height: 100px;">회원 정보보기</button>
+                        </form>
+                    </td>
+                    <td>
+                        <a th:href="@{/member/update(id=${session.id})}">
+                            <button type="button" class="btn btn-info btn-lg" style="height: 100px;">회원 정보수정</button>
+                        </a>
+                    </td>
+                    <td>
+                        <a th:href="@{/member/delete(id=${session.id})}">
+                            <button type="button" class="btn btn-warning btn-lg" style="height: 100px;">회원 탈퇴</button>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="/member/logout">
+                            <button type="button" class="btn btn-secondary btn-lg"  style="height: 100px;">회원 로그아웃</button>
+                        </a>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
     <hr>

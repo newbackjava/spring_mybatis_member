@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.board.dao.BoardMapper">
+
+
+    <insert id="insertBoard"
+        parameterType="com.example.demo.board.vo.BoardVO">
+        insert into board(title, content, writer)
+        values (#{title}, #{content}, #{writer})
+    </insert>
+
+    <!-- 게시글 수정 -->
+    <update id="updateBoard"
+            parameterType="com.example.demo.board.vo.BoardVO">
+        UPDATE board
+        SET title = #{title},
+            content = #{content},
+            writer = #{writer}
+        WHERE no = #{no}
+    </update>
+
+    <!-- 게시글 삭제 -->
+    <delete id="deleteBoard"
+            parameterType="long">
+        DELETE FROM board
+        WHERE no = #{no}
+    </delete>
+
+    <!-- 게시글 번호로 조회 -->
+    <select id="selectBoardByNo"
+            parameterType="int"
+            resultType="com.example.demo.board.vo.BoardVO">
+        SELECT no, title, content, writer
+        FROM board
+        WHERE no = #{no}
+    </select>
+
+    <select id="selectBoardAll"
+            resultType="com.example.demo.board.vo.BoardVO">
+        SELECT no, title, content, writer
+        FROM board
+        order by no desc
+    </select>
+</mapper>

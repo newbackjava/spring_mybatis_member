@@ -45,8 +45,12 @@ public class MemberController {
     }
 
     @GetMapping("delete")
-    public String delete(){
-        return "member/delete";
+    public String delete(String id, HttpSession session) {
+        int result = memberService.deleteMember(id);
+        if (result == 1) {
+            session.removeAttribute("id");
+        }
+        return "redirect:/";
     }
 
     @PostMapping("read")
@@ -54,8 +58,10 @@ public class MemberController {
         //String id = request.getParameter("id");
         //@RequestParam("id") int id
         //==> 전달받은 파라메터이름과 저장할 변수이름이 다른 경우 사용
-        model.addAttribute("id", id);
-        model.addAttribute("name", "hong");
+        System.out.println("id >>>>>>>>>>>>>>>>>>>>>" + id);
+        MemberVO memberVO = memberService.getMemberById(id);
+        System.out.println(memberVO);
+        model.addAttribute("memberVO", memberVO);
         return "member/read";
     }
 
@@ -72,12 +78,17 @@ public class MemberController {
 
 
     @PostMapping("login")
-    public String login(String id, String pw, HttpSession session){
-        if(id.equals("apple") && pw.equals("1234")){
-            session.setAttribute("id", id);
+    public String login(String id, String pw, HttpSession session, Model model){
+        MemberVO memberVO = memberService.getMemberById(id);
+        if(memberVO != null) {
+            if (pw.equals(memberVO.getPw())) {
+                session.setAttribute("id", id);
+            }
+        }else{
+            model.addAttribute("result", "로그인 실패! 재입력 해주세요.!");
         }
         System.out.println("세션값 설정 완료>> " + session.getAttribute("id") );
-        return "redirect:/";
+        return "/member/member";
     }
 
     @GetMapping("logout")
@@ -88,14 +99,37 @@ public class MemberController {
     }
 
     @GetMapping("update")
-    public String update(){
-        return "redirect:/"; //첫페이지를 클라이언트가 호출하도록 함.
-        //return "update";
+    public String update(String id, Model model){
+        System.out.println("id >>>>>>>>>>>>>>>>>>>>>" + id);
+        MemberVO memberVO = memberService.getMemberById(id);
+        System.out.println("memberVO >>>>>>>>>>>>>>>>>>>>>" + memberVO);
+        model.addAttribute("memberVO", memberVO);
+        return "member/update";
     }
 
     @PostMapping("update2")
     public String update2(MemberVO memberVO, Model model){
-        model.addAttribute("memberVO", memberVO);
+        int result = memberService.updateMember(memberVO);
+        if(result == 1){
+            System.out.println("memberVO >>>>>>>>>>>>>>>>>>>>>" + memberVO);
+            model.addAttribute("memberVO", memberVO);
+        }
         return "member/update2";
     }
 }
+
+
+//        @PostMapping("login")
+//        public String login(String id, String pw, HttpSession session){
+//            // 서비스 계층에서 로그인 검증 처리
+//            boolean isLoginSuccessful = memberService.validateLogin(id, pw);
+//
+//            if (isLoginSuccessful) {
+//                session.setAttribute("id", id); // 로그인 성공 시 세션에 ID 저장
+//                System.out.println("로그인 성공, 세션값 설정 완료>> " + session.getAttribute("id"));
+//                return "/member/member";
+//            } else {
+//                System.out.println("로그인 실패: 아이디 또는 비밀번호 불일치");
+//                return "/member/login"; // 로그인 실패 시 로그인 페이지로 이동
+//            }
+//        }

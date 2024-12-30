@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.member.dao.MemberMapper">
+
+    <!-- Insert a new member -->
+    <insert id="insertMember"
+            parameterType="com.example.demo.member.vo.MemberVO">
+        INSERT INTO Member (id, pw, name, tel)
+        VALUES (#{id}, #{pw}, #{name}, #{tel})
+    </insert>
+
+    <!-- Select a member by ID -->
+    <select id="selectMemberById"
+            parameterType="string"
+            resultType="com.example.demo.member.vo.MemberVO">
+        SELECT * FROM Member
+        WHERE id = #{id}
+    </select>
+
+    <!-- Select all members -->
+    <select id="selectMemberAll"
+            resultType="com.example.demo.member.vo.MemberVO">
+        SELECT * FROM Member
+    </select>
+
+    <!-- Update member information (only phone number for now) -->
+    <update id="updateMember" parameterType="com.example.demo.member.vo.MemberVO">
+        UPDATE Member
+        SET pw = #{pw}, name = #{name}, tel = #{tel}
+        WHERE id = #{id}
+    </update>
+
+    <!-- Delete a member by ID -->
+    <delete id="deleteMember" parameterType="string">
+        DELETE FROM Member
+        WHERE id = #{id}
+    </delete>
+
+</mapper>
